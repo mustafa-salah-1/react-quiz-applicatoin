@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 20vmin;
+  padding-block: 1rem;
+  pointer-events: none;
+} 
+
+.App-header {  
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
+}
+  
