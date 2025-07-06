@@ -1,9 +1,12 @@
-export default function NextQuestion({ dispatch, answer }) {
+export default function NextQuestion({ dispatch, index, length, answer }) {
   return (
-    answer && (
-      <div className="NextQuestion">
+    <div className="NextQuestion">
+      {answer !== null && index < length - 1 && (
         <button onClick={() => dispatch({ type: "next" })}>Next</button>
-      </div>
-    )
+      )}
+      {answer !== null && index === length - 1 && (
+        <button onClick={() => dispatch({ type: "finish" })}>Finish</button>
+      )}
+    </div>
   );
 }

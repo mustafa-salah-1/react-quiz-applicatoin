@@ -1,5 +1,4 @@
 export default function Options({ question, dispatch, answer }) {
-  console.log(question);
   return (
     <div className="Options">
       {question.options.map((Option, index) => (
