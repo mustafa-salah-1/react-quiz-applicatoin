@@ -1,8 +1,8 @@
 export default function Options({ question, dispatch, answer }) {
   return (
-    <div className="Options">
+    <div style={{ display: 'flex',flexDirection:'column' ,gap:'10px' }} className="Options">
       {question.options.map((Option, index) => (
-        <button
+        <button style={{ textAlign: 'left' }}
           className={` ${index === answer ? "answer" : ""} ${
             answer !== null
               ? index === question.currectOption

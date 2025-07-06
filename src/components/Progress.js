@@ -11,11 +11,11 @@ export default function Progress({
         style={{
           backgroundColor: "white",
           overflow: "hidden",
-          borderRadius: "10px", 
+          borderRadius: "10px",
         }}
       >
         <div
-          style={{ 
+          style={{
             padding: "5px",
             backgroundColor: "#53d3f6",
             width: `${

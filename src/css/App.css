@@ -5,7 +5,7 @@
 }
 
 .App-logo {
-  height: 20vmin;
+  height: 10vmin;
   padding-block: 1rem;
   pointer-events: none;
 }
@@ -17,11 +17,25 @@
 }
 
 .answer {
-  translate: 5px 0px;
+  translate: 15px 0px;
 }
 .currect {
-  background-color: greenyellow;
+  background-color: #46b3d1;
 }
 .wrong {
   background-color: rgb(252, 143, 1);
 }
+button{
+  color: white;
+  background-color: #3b404c;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: 15px 25px;
+  font-weight: 600; 
+}
+button:hover{ 
+  border-color:  white;
+}
+.Options button:hover{ 
+  translate: 15px 0px;
+} 
