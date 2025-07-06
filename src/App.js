@@ -11,8 +11,94 @@ import Progress from "./components/Progress";
 import FinishScreen from "./components/FinishScreen";
 
 const initialState = {
-  questions: [],
-  status: "loading",
+  questions: [
+    {
+      id: 1,
+      question:
+        "Which programming language is primarily used for web development and runs in the browser?",
+      options: ["Python", "JavaScript", "C++", "Java"],
+      currectOption: 1,
+      points: 10,
+    },
+    {
+      id: 2,
+      question:
+        "Which language is known for its use in data science and machine learning?",
+      options: ["Ruby", "Python", "PHP", "Swift"],
+      currectOption: 1,
+      points: 10,
+    },
+    {
+      id: 3,
+      question:
+        "Which programming language is used for developing Android apps?",
+      options: ["Kotlin", "Swift", "C#", "Go"],
+      currectOption: 0,
+      points: 10,
+    },
+    {
+      id: 4,
+      question: "Which language is mainly used for iOS app development?",
+      options: ["Java", "Swift", "C", "Perl"],
+      currectOption: 1,
+      points: 10,
+    },
+    {
+      id: 5,
+      question:
+        "Which language is commonly used for server-side web development?",
+      options: ["HTML", "CSS", "PHP", "TypeScript"],
+      currectOption: 2,
+      points: 10,
+    },
+    {
+      id: 6,
+      question:
+        "Which programming language is known for its simplicity and readability?",
+      options: ["Python", "Assembly", "C++", "Rust"],
+      currectOption: 0,
+      points: 10,
+    },
+    {
+      id: 7,
+      question: "Which language is used for styling web pages?",
+      options: ["HTML", "CSS", "JavaScript", "SQL"],
+      currectOption: 1,
+      points: 10,
+    },
+    {
+      id: 8,
+      question:
+        "Which language is best known for its use in statistical computing?",
+      options: ["R", "Java", "Scala", "Lua"],
+      currectOption: 0,
+      points: 10,
+    },
+    {
+      id: 9,
+      question: "Which language is used to query databases?",
+      options: ["SQL", "C#", "Ruby", "Bash"],
+      currectOption: 0,
+      points: 10,
+    },
+    {
+      id: 10,
+      question:
+        "Which programming language is known for its use in embedded systems?",
+      options: ["JavaScript", "C", "PHP", "Python"],
+      currectOption: 1,
+      points: 10,
+    },
+    {
+      id: 11,
+      question: "Which language is mainly used for front-end web development?",
+      options: ["JavaScript", "Java", "C++", "Go"],
+      currectOption: 0,
+      points: 10,
+    },
+  ],
+  // status: "loading", you can use with API
+  status: "ready",
   index: 0,
   point: 0,
   answer: null,
@@ -72,17 +158,16 @@ function App() {
     }
   }
 
-  const [{ questions, status, index, answer, point ,error}, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ questions, status, index, answer, point, error }, dispatch] =
+    useReducer(reducer, initialState);
 
-  useEffect(function () {
-    fetch("http://localhost:8000/questions")
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: "dataReceived", payload: data }))
-      .catch((err) => dispatch({ type: "dataFailed",payload:err.message }));
-  }, []);
+  // you can use with API
+  // useEffect(function () {
+  //   fetch("http://localhost:8000/questions")
+  //     .then((res) => res.json())
+  //     .then((data) => dispatch({ type: "dataReceived", payload: data }))
+  //     .catch((err) => dispatch({ type: "dataFailed", payload: err.message }));
+  // }, []);
 
   const length = questions.length;
   const maxPoint = questions.reduce((prev, cur) => prev + cur.points, 0);
