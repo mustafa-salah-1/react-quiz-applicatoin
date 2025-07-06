@@ -51,7 +51,8 @@ function App() {
       case "dataFailed":
         return {
           ...state,
-          status: "fetch data failed",
+          status: "error",
+          error: action.payload,
         };
       case "finish":
         return {
@@ -71,7 +72,7 @@ function App() {
     }
   }
 
-  const [{ questions, status, index, answer, point }, dispatch] = useReducer(
+  const [{ questions, status, index, answer, point ,error}, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -80,7 +81,7 @@ function App() {
     fetch("http://localhost:8000/questions")
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
-      .catch((err) => dispatch({ type: "dataFailed" }));
+      .catch((err) => dispatch({ type: "dataFailed",payload:err.message }));
   }, []);
 
   const length = questions.length;
@@ -90,7 +91,7 @@ function App() {
       <Header />
       <Main>
         {status === "loading" && <Loader />}
-        {status === "error" && <Error error={status} />}
+        {status === "error" && <Error error={error} />}
         {status === "ready" && (
           <StartScreen questions={length} dispatch={dispatch} />
         )}
