@@ -51,7 +51,7 @@ function App() {
       case "dataFailed":
         return {
           ...state,
-          status: "error",
+          status: "fetch data Failed",
         };
       case "finish":
         return {
