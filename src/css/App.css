@@ -45,7 +45,16 @@ button:hover {
   translate: 15px 0px;
 }
 .NextQuestion {
-  padding: 10px;
   display: flex;
   justify-content: space-between;
+}
+
+.Timer {
+  font-weight: 600;
+  padding: 15px 25px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background-color: #3b404c;
 }

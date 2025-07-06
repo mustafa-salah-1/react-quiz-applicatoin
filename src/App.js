@@ -9,6 +9,8 @@ import Question from "./components/Question";
 import NextQuestion from "./components/NextQuestion";
 import Progress from "./components/Progress";
 import FinishScreen from "./components/FinishScreen";
+import Timer from "./components/Timer";
+import Footer from "./components/Footer";
 
 const initialState = {
   questions: [
@@ -102,6 +104,7 @@ const initialState = {
   index: 0,
   point: 0,
   answer: null,
+  secondReminder: null,
 };
 
 function App() {
@@ -117,6 +120,7 @@ function App() {
         return {
           ...state,
           status: "active",
+          secondReminder: state.questions.length * 10,
         };
       case "newAnswer":
         const question = state.questions.at(state.index);
@@ -153,13 +157,21 @@ function App() {
           answer: null,
           status: "ready",
         };
+      case "tick":
+        return {
+          ...state,
+          secondReminder: state.secondReminder - 1,
+          status: state.secondReminder !== 0 ? state.status : "finished",
+        };
       default:
         throw new Error("Action unkonwn");
     }
   }
 
-  const [{ questions, status, index, answer, point, error }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { questions, status, index, answer, point, error, secondReminder },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
   // you can use with API
   // useEffect(function () {
@@ -194,12 +206,15 @@ function App() {
               dispatch={dispatch}
               answer={answer}
             />
-            <NextQuestion
-              dispatch={dispatch}
-              index={index}
-              length={length}
-              answer={answer}
-            />
+            <Footer>
+              <Timer dispatch={dispatch} secondReminder={secondReminder} />
+              <NextQuestion
+                dispatch={dispatch}
+                index={index}
+                length={length}
+                answer={answer}
+              />
+            </Footer>
           </>
         )}
         {status === "finished" && (
