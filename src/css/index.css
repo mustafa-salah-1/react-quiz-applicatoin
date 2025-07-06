@@ -8,9 +8,7 @@ body {
   background-color: #282c34;
   color: white;
 }
-*{
-  transition: 0.3s;
-}
+ 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
