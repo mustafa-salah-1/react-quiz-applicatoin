@@ -132,7 +132,7 @@ function App() {
         return {
           ...state,
           answer: null,
-          index: state.index++,
+          index: state.index + 1,
         };
       case "dataFailed":
         return {
