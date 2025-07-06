@@ -1,6 +1,6 @@
 import "./css/App.css";
 import Main from "./Main";
-import Header from "./Header";
+import Header from "./components/Header";
 import { useEffect, useReducer } from "react";
 
 const initialState = {
