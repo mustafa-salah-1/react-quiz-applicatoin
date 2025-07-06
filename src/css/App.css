@@ -2,6 +2,7 @@
   margin-inline: auto;
   text-align: center;
   max-width: 600px;
+  padding-inline: 20px;
 }
 .App * {
   transition: 0.3s;
@@ -26,7 +27,7 @@
   background-color: #46b3d1;
 }
 .wrong {
-  background-color: rgb(252, 143, 1);
+  background-color: rgb(223, 126, 0);
 }
 button {
   color: white;
@@ -43,7 +44,7 @@ button:hover {
 .Options button:hover {
   translate: 15px 0px;
 }
-.NextQuestion{
+.NextQuestion {
   padding: 10px;
   display: flex;
   justify-content: space-between;

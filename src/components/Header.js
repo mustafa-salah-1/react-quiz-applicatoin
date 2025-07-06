@@ -3,9 +3,9 @@ export default function Header() {
   return (
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
-      <h1>
+      <h2>
        THE REACT QUIZ
-      </h1>
+      </h2>
     </header>
   );
 }
