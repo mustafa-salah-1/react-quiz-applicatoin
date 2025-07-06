@@ -2,10 +2,18 @@ import "./css/App.css";
 import Main from "./Main";
 import Header from "./components/Header";
 import { useEffect, useReducer } from "react";
+import Loader from "./components/Loader";
+import Error from "./components/Error";
+import StartScreen from "./components/StartScreen";
+import Question from "./components/Question";
+import NextQuestion from "./components/NextQuestion";
 
 const initialState = {
   questions: [],
   status: "loading",
+  index: 0,
+  point: 0,
+  answer: null,
 };
 
 function App() {
@@ -17,30 +25,67 @@ function App() {
           questions: action.payload,
           status: "ready",
         };
-        case "dataFailed":
-          return {
-            ...state,
-            status: "error"
-          }
+      case "start":
+        return {
+          ...state,
+          status: "active",
+        };
+      case "newAnswer":
+        const question = state.questions.at(state.index);
+        return {
+          ...state,
+          answer: action.payload,
+          point:
+            action.payload === question.currectOption
+              ? state.point + question.points
+              : state.point,
+        };
+      case "next":
+        return {
+          ...state,
+          answer: null,
+          index: state.index++,
+        };
+      case "dataFailed":
+        return {
+          ...state,
+          status: "error",
+        };
       default:
         throw new Error("Action unkonwn");
     }
   }
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status, index, answer }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   useEffect(function () {
     fetch("http://localhost:8000/questions")
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
-      .catch((err) => dispatch({type: "dataFailed"}));
+      .catch((err) => dispatch({ type: "dataFailed" }));
   }, []);
-
   return (
     <div className="App">
       <Header />
       <Main>
-        <p>This is the main content area.</p>
+        {status === "loading" && <Loader />}
+        {status === "error" && <Error error={status} />}
+        {status === "ready" && (
+          <StartScreen questions={questions.length} dispatch={dispatch} />
+        )}
+        {status === "active" && (
+          <>
+            <Question
+              question={questions[index]}
+              dispatch={dispatch}
+              answer={answer}
+            />
+            <NextQuestion dispatch={dispatch} answer={answer} />
+          </>
+        )}
       </Main>
     </div>
   );
